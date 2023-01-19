@@ -85,3 +85,51 @@ export default function App() {
 
 
    ```
+   
+### 2) Create a React component that renders a form with two input fields (username and password) and a submit button. The form should validate the input fields and display error messages if the input is not valid. The form should also handle the form submission and display a success message if the input is valid.
+
+``` js
+import "./styles.css";
+import React, { useState } from "react";
+
+
+export default function App() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(username, password);
+    if (username === "Vaibhav" && password === "12345")
+      alert("Form is submitted!");
+    else alert("Form is not submitted!");
+    setUsername("");
+    setPassword("");
+  }
+
+  return (
+    <div className="App">
+      <h1>React Coding Questions</h1>
+      <h2>Happy Coding!</h2>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Enter username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Enter password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+```
+
+
