@@ -215,25 +215,28 @@ export default function App() {
           <option>Descending</option>
         </select>
         <table>
-          <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>salary</th>
-          </tr>
-          {search.length <= 0
-            ? "No data Found!😔"
-            : search.map((el) => (
-                <tr key={el.id}>
-                  <td>{el.name}</td>
-                  <td>{el.age}</td>
-                  <td>{el.salary}</td>
-                </tr>
-              ))}
+          <tbody>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>salary</th>
+            </tr>
+            {search.length <= 0
+              ? "No data Found!😔"
+              : search.map((el) => (
+                  <tr key={el.id}>
+                    <td>{el.name}</td>
+                    <td>{el.age}</td>
+                    <td>{el.salary}</td>
+                  </tr>
+                ))}
+          </tbody>
         </table>
       </div>
     </div>
   );
 }
+
 
 
 ```
