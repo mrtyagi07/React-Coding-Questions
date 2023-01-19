@@ -240,3 +240,64 @@ export default function App() {
 
 
 ```
+
+### 4) Create a React component that displays a list of movies from the Open Movie Database (OMDB) API (http://www.omdbapi.com/). The component should have a search input that allows users to search for movies by title and a button to trigger the search. The component should also display the title, year, and poster of each movie in the list. Finally, the component should include error handling for when the API request fails. (You can use the API key apikey=yourkey to make the request).
+
+Solution ➡️
+
+``` js
+import "./styles.css";
+import React, { useEffect, useState } from "react";
+
+export default function App() {
+  const [search, setSearch] = useState("");
+  const [data, setData] = useState({});
+
+  const handleSearch = async () => {
+    try {
+      const response = await fetch(
+        `https://www.omdbapi.com/?t=${search}&apikey=7fe42f18`
+      );
+      const movieData = await response.json();
+      console.log(movieData);
+      setData(movieData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return (
+    <div className="App">
+      <h1>Hello CodeSandbox</h1>
+      <h2>Start editing to see some magic happen!</h2>
+      <input
+        type="text"
+        placeholder="Enter Movie Name"
+        onChange={(e) => setSearch(e.target.value)}
+      />
+      <button type="button" onClick={handleSearch}>
+        Search
+      </button>
+      {/* //title, year, and poster */}
+
+      <div className="card">
+        {Object.keys(data).length <= 0 ? (
+          <p>"No data found! 😔"</p>
+        ) : (
+          <>
+            <img src={data?.Poster} alt="postar" />
+            <div class="container">
+              <h4>
+                <b>{data?.Title}</b>
+              </h4>
+              <p>{data?.Year}</p>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+```
+
