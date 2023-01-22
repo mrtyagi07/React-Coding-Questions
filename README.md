@@ -1,4 +1,19 @@
-# React-Coding-Questions
+# React Interview Coding Questions & Answers
+
+> Click :star:if you like the project and follow [@mrtyagi07](https://twitter.com/mrtyagi07) for more updates.
+---
+
+<p align="center">
+  <a href=https://twitter.com/mrtyagi07>
+    <img src="https://i.ibb.co/ZLpJXrY/vaibhav-tyagi-logo-removebg-preview.png" alt="Vaibhav's Logo">
+  </a>
+  <p align="center">
+    Explore the best <a href=https://vaibhavtyagi.hashnode.dev/ target="_blank">blogs</a> to learn JavaScript and React.
+  </p>
+</p>
+
+---
+
 
 
 ### 1) Create a React component that renders a list of items from an array of data, and allows the user to filter the list by a search term.
