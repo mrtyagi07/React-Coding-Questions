@@ -301,3 +301,63 @@ export default function App() {
 
 ```
 
+### 4) Create a React component that displays a list of airlines image and name from the Fake Rest API (https://www.instantwebtools.net/fake-rest-api#read-airlines/). Component should display a list of airlines from a given API, with the ability to change the number of items displayed per page and navigate through the pages of the list? Finally, the component should include error handling for when the API request fails.
+
+Solution ➡️
+
+- CodeSand Box https://codesandbox.io/s/airlines-trh6sl?file=/src/App.js
+
+``` js
+import "./styles.css";
+import React, { useEffect, useState } from "react";
+
+export default function App() {
+  const [airlines, setAirlines] = useState([]);
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(10);
+
+  useEffect(() => {
+    fetch(
+      `https://api.instantwebtools.net/v1/passenger?page=${page}&size=${size}`
+    )
+      .then((res) => res.json())
+      .then((data) => setAirlines(data.data))
+      .catch((err) => console.log(err));
+  }, [page, size]);
+
+  const handlePageChange = (increment) => {
+    setPage(page + increment);
+  }
+
+  return (
+    <div className="App">
+      <h1>React Coding Questions</h1>
+      <h2>Happy Coding!</h2>
+      {airlines?.map((el) => (
+        <div key={el._id} className="wrapper">
+          <img src={el.airline[0].logo} alt="airline" />
+          <h1>{el.airline[0].name}</h1>
+        </div>
+      ))}
+      <div className="pagination">
+        <button onClick={() => handlePageChange(-1)}>&laquo;</button>
+        <button onClick={() => handlePageChange(1)}>&raquo;</button>
+      </div>
+
+      <label htmlFor="size">
+        Want to see more items in one page? (Write a number):
+      </label>
+
+      <input
+        type="number"
+        required
+        onChange={(e) => setSize(e.target.value)}
+        value={size}
+      />
+    </div>
+  );
+}
+
+
+```
+
