@@ -376,3 +376,70 @@ export default function App() {
 
 ```
 
+### 3) Create a React component that allows users to search for GIFs using the Giphy API. The component should have an input field for the search query and a button to initiate the search. When the search button is clicked, the component should make a GET request to the Giphy API and display the results in a grid of GIFs. The component should also handle any errors that occur during the API request and display an appropriate error message. The Giphy API (https://developers.giphy.com/)
+
+Solution ➡️
+
+``` js
+import React, { useState } from "react";
+
+import "./app.css";
+
+const App = () => {
+  const [input, setInput] = useState("");
+  const [data, setData] = useState([]);
+
+  const handleSearch = () => {
+    fetch(
+      `https://api.giphy.com/v1/gifs/search?api_key=YOUR_KEY&q=${input}&limit=25&offset=0&rating=g&lang=en`
+    )
+      .then((res) => res.json())
+      .then((data) => setData(data.data))
+      .catch((err) => console.log(err));
+  };
+
+  return (
+    <>
+      <div className="flex justify-center items-center p-8">
+        <div className="flex items-center border-b border-teal-500 py-2">
+          <input
+            className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+            type="text"
+            placeholder="LOL"
+            aria-label="gif"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <button
+            className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
+            type="button"
+            onClick={handleSearch}
+          >
+            Search
+          </button>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-3 gap-4">
+        {data?.map((el) => (
+          <div
+            key={el.id}
+            className="max-w-sm rounded overflow-hidden shadow-lg"
+          >
+            <img
+              className="w-full"
+              src={el.images.original.url}
+              alt="Sunset in the mountains"
+            />
+          </div>
+        ))}
+      </div>
+    </>
+  );
+};
+
+export default App;
+
+
+```
+
