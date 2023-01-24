@@ -443,3 +443,91 @@ export default App;
 
 ```
 
+### 4) Create a React component that renders a table with a list of users. Each row in the table should display the user's first name, last name, and email address. The component should have a text input that allows the user to filter the list of users by their first name. Use the following API to fetch the list of users: https://jsonplaceholder.typicode.com/users.
+
+Solution ➡️
+
+``` js
+import React, { useEffect, useState } from "react";
+
+import "./app.css";
+
+const App = () => {
+  const [data, setData] = useState([]);
+  const [input, setInput] = useState("");
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((err) => console.log(err));
+  }, [input]);
+
+  const handleSearch = () => {
+    const string = input.charAt(0).toUpperCase() + input.slice(1);
+    setData(
+      data.filter(
+        (el) =>
+          el.name.includes(string) ||
+          el.username.includes(string) ||
+          el.email.includes(string)
+      )
+    );
+  };
+
+  return (
+    <div className="w-full h-screen p-8">
+      <div className="flex items-center border-b border-teal-500 py-2 mb-8">
+        <input
+          className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+          type="text"
+          placeholder="Vaibhav"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <button
+          className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
+          type="button"
+          onClick={handleSearch}
+        >
+          Search
+        </button>
+      </div>
+      <div className="relative overflow-x-auto">
+        <table className="w-full text-sm text-left text-gray-500 ">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 ">
+            <tr>
+              <th scope="col" className="px-6 py-3">
+                Name
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Username
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Email
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((el) => (
+              <tr
+                key={el.id}
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+              >
+                <td className="px-6 py-4">{el.name}</td>
+                <td className="px-6 py-4">{el.username}</td>
+                <td className="px-6 py-4">{el.email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default App;
+
+
+```
+
