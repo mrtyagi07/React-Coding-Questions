@@ -429,7 +429,7 @@ const App = () => {
             <img
               className="w-full"
               src={el.images.original.url}
-              alt="Sunset in the mountains"
+              alt="Gify"
             />
           </div>
         ))}
@@ -439,6 +439,8 @@ const App = () => {
 };
 
 export default App;
+
+https://codesandbox.io/s/gify-question-nh03k7
 
 
 ```
@@ -528,6 +530,5 @@ const App = () => {
 
 export default App;
 
-
 ```
-
+https://codesandbox.io/s/users-api-77g76l?file=/src/app.jsx
